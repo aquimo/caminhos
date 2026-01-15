@@ -1,7 +1,7 @@
 <?php
 /**
  * Ponto de entrada principal da aplicação
- * Sistema de Gestão de Casas para Arrendamento Temporário
+ * Sistema de Gestão de Casas para Hospedagem
  */
 
 // Definir constantes da aplicação

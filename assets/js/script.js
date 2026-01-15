@@ -1,5 +1,5 @@
 /**
- * Sistema de Gestão de Casas para Arrendamento Temporário
+ * Sistema de Gestão de Casas para Hospedagem
  * Ficheiro JavaScript Principal
  */
 

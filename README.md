@@ -1,6 +1,6 @@
-# Sistema de Gestão de Casas para Arrendamento Temporário
+# Sistema de Gestão de Casas para Hospedagem
 
-Sistema completo em PHP para gestão de casas de arrendamento temporário, desenvolvido com padrão MVC e compatível com WAMP.
+Sistema completo em PHP para gestão de casas de hospedagem, desenvolvido com padrão MVC e compatível com WAMP.
 
 ## 🚀 Funcionalidades
 
@@ -57,7 +57,7 @@ Sistema completo em PHP para gestão de casas de arrendamento temporário, desen
    mysql -u root -p < database.sql
    ```
 
-2. Verifique se a base de dados `caminhos_arrendamento` foi criada com todas as tabelas.
+2. Verifique se a base de dados `caminhos_hospedagem` foi criada com todas as tabelas.
 
 ### 2. Configurar Conexão
 
@@ -65,7 +65,7 @@ Edite o ficheiro `config/database.php` se necessário:
 
 ```php
 private $host = 'localhost';
-private $db_name = 'caminhos_arrendamento';
+private $db_name = 'caminhos_hospedagem';
 private $username = 'root';
 private $password = '';
 ```

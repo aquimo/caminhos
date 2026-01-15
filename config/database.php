@@ -1,12 +1,12 @@
 <?php
 /**
  * Configuração da Base de Dados
- * Sistema de Gestão de Casas para Arrendamento Temporário
+ * Sistema de Gestão de Casas para Hospedagem
  */
 
 class Database {
     private $host = 'localhost';
-    private $db_name = 'caminhos_arrendamento';
+    private $db_name = 'caminhos_hospedagem';
     private $username = 'root';
     private $password = '';
     private $charset = 'utf8mb4';

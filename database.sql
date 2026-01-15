@@ -1,8 +1,8 @@
--- Sistema de Gestão de Casas para Arrendamento Temporário
+-- Sistema de Gestão de Casas para Hospedagem
 -- Base de Dados MySQL
 
-CREATE DATABASE IF NOT EXISTS caminhos_arrendamento CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE caminhos_arrendamento;
+CREATE DATABASE IF NOT EXISTS caminhos_hospedagem CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE caminhos_hospedagem;
 
 -- Tabela de utilizadores
 CREATE TABLE utilizadores (
@@ -144,10 +144,10 @@ INSERT INTO localizacoes (nome, endereco, cidade, codigo_postal, descricao) VALU
 ('Tofo', 'Estrada Nacional, nº 456', 'Tofo', '2100', 'Localização em Tofo com vista para o mar');
 
 -- Inserir casas de exemplo
-INSERT INTO casas (codigo, localizacao_id, nome, descricao, tipologia, capacidade, area_decimal, preco_diario, preco_semanal, preco_mensal, comodidades) VALUES 
-('CASA001', 1, 'Apartamento T1 Cidade', 'Apartamento T1 com varanda e vista para a cidade', 'T1', 2, 45.50, 75.00, 450.00, '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]'),
-('CASA002', 1, 'Apartamento T2 Cidade', 'Apartamento T2 espaçoso com 2 quartos', 'T2', 4, 65.00, 95.00, 570.00, '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]'),
-('CASA003', 2, 'Casa de Praia Tofo', 'Casa de 3 quartos com vista para o mar', 'T3', 6, 120.00, 180.00, 1080.00, '["WiFi", "TV", "Ar Condicionado", "Cozinha Equipada", "Churrasqueiro", "Piscina"]');
+INSERT INTO casas (codigo, localizacao_id, nome, descricao, tipologia, capacidade, area_decimal, preco_diario, preco_semanal, preco_mensal, estado, comodidades, imagens) VALUES 
+('CASA001', 1, 'Apartamento T1 Cidade', 'Apartamento T1 com varanda e vista para a cidade', 'T1', 2, 45.50, 75.00, 450.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]', '[]'),
+('CASA002', 1, 'Apartamento T2 Cidade', 'Apartamento T2 espaçoso com 2 quartos', 'T2', 4, 65.00, 95.00, 570.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]', '[]'),
+('CASA003', 2, 'Casa de Praia Tofo', 'Casa de 3 quartos com vista para o mar', 'T3', 6, 120.00, 180.00, 1080.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Cozinha Equipada", "Churrasqueiro", "Piscina"]', '[]');
 
 -- Índices para melhor performance
 CREATE INDEX idx_casas_localizacao ON casas(localizacao_id);

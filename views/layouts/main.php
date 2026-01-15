@@ -14,7 +14,7 @@
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h1>Bairro Ferroviário</h1>
-                <p>Gestão de Arrendamento</p>
+                <p>Gestão de Hospedagem</p>
                 <small style="color: rgba(255,255,255,0.7); font-size: 0.7rem;">Desenvolvido por: Oscar Massangaia</small>
             </div>
             
@@ -124,7 +124,7 @@
 
             <!-- Rodapé -->
             <footer class="footer">
-                <p>&copy; <?php echo date('Y'); ?> Sistema de Gestão de Casas para Arrendamento Temporário. Todos os direitos reservados.</p>
+                <p>&copy; <?php echo date('Y'); ?> Sistema de Gestão de Casas para Hospedagem. Todos os direitos reservados.</p>
             </footer>
         </main>
     </div>
