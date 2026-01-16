@@ -2,6 +2,11 @@
 /**
  * Modelo de Hóspedes
  * Sistema de Gestão de Casas para Hospedagem
+ * 
+ * @author Oscar Massangaia
+ * @institution Universidade Aberta ISCED
+ * @course Engenharia Informática
+ * @version 1.0
  */
 
 class HospedeModel {

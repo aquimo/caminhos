@@ -2,6 +2,11 @@
 
 Sistema completo em PHP para gestão de casas de hospedagem, desenvolvido com padrão MVC e compatível com WAMP.
 
+**Autor:** Oscar Massangaia  
+**Instituição:** Universidade Aberta ISCED  
+**Curso:** Engenharia Informática  
+**Versão:** 1.0
+
 ## 🚀 Funcionalidades
 
 ### Sistema de Autenticação
@@ -290,3 +295,8 @@ Este sistema foi desenvolvido para fins educativos e pode ser modificado conform
 **Desenvolvido com PHP puro, MySQL, HTML5, CSS3 e JavaScript**
 **Compatível com WAMP (Apache + MySQL + PHP)**
 **🆕 Sistema Integrado de Hóspedes e Reservas**
+
+**Autor:** Oscar Massangaia  
+**Instituição:** Universidade Aberta ISCED  
+**Curso:** Engenharia Informática  
+**Versão:** 1.0

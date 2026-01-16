@@ -1,6 +1,12 @@
 <?php
 /**
  * Controlador de Casas
+ * Sistema de Gestão de Casas para Hospedagem
+ * 
+ * @author Oscar Massangaia
+ * @institution Universidade Aberta ISCED
+ * @course Engenharia Informática
+ * @version 1.0
  */
 
 require_once 'models/CasaModel.php';
