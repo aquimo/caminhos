@@ -15,19 +15,31 @@ Sistema completo em PHP para gestão de casas de hospedagem, desenvolvido com pa
 3. **Contabilidade** - Pagamentos e relatórios financeiros
 4. **Gestor de Condomínios** - Gestão de casas por localização
 
+### 🆕 Sistema de Hóspedes
+- Cadastro completo de hóspedes com informações detalhadas
+- Geração automática de número de conta (6 dígitos)
+- Controle de estado (ativo, inativo)
+- Associação automática com casas
+- Cálculo automático de valores por permanência
+- Histórico de estadias e pagamentos
+
 ### Gestão de Casas
 - Cadastro de casas com informações detalhadas
 - Gestão de localizações e condomínios
 - Upload de imagens
 - Controle de estado (disponível, ocupado, manutenção)
 - Preços dinâmicos (diário, semanal, mensal)
-
-### Sistema de Reservas
-- Criação e gestão de reservas
 - Verificação automática de disponibilidade
-- Processo de check-in e check-out
-- Cálculo automático de valores
+
+### 🔄 Sistema de Reservas Integrado
+- **Fluxo Hóspede → Casa → Reserva**
+- Seleção de hóspedes já registados
+- Opção de criar novo hóspede durante reserva
+- Verificação automática de disponibilidade
+- Processo de check-in e check-out integrado
+- Cálculo automático de valores com preços progressivos
 - Cancelamento de reservas
+- Atualização automática de estado das casas
 
 ### Relatórios Financeiros
 - Receitas por período
@@ -100,16 +112,19 @@ caminhos/
 │   ├── AuthController.php
 │   ├── CasaController.php
 │   ├── DashboardController.php
+│   ├── HospedeController.php  # 🆕 Controlador de hóspedes
 │   ├── RelatorioController.php
 │   ├── ReservaController.php
 │   └── UtilizadorController.php
 ├── helpers/                   # Funções auxiliares
 │   ├── auth_helper.php
+│   ├── currency_helper.php     # 🆕 Helper para formatação de moeda
 │   ├── session_helper.php
 │   └── url_helper.php
 ├── models/                    # Modelos MVC
 │   ├── CasaModel.php
 │   ├── ClienteModel.php
+│   ├── HospedeModel.php       # 🆕 Modelo de hóspedes
 │   ├── LocalizacaoModel.php
 │   ├── PagamentoModel.php
 │   ├── ReservaModel.php
@@ -120,6 +135,7 @@ caminhos/
 │   ├── auth/
 │   ├── casas/
 │   ├── dashboard/
+│   ├── hospedes/              # 🆕 Views de hóspedes
 │   ├── relatorios/
 │   ├── reservas/
 │   └── utilizadores/
@@ -129,12 +145,46 @@ caminhos/
 
 ## 🔧 Configuração Adicional
 
-### Criar Novo Utilizador
+### 🆕 Criar Novo Hóspede
 
-1. Acesse como Gestor Geral
-2. Vá em "Gestão de Utilizadores"
-3. Clique em "Novo Utilizador"
-4. Preencha os dados e selecione o perfil adequado
+1. Acesse como Gestor Geral ou Secretaria
+2. Vá em "Hospedagem" → "Hóspedes"
+3. Clique em "Novo Hóspede"
+4. Preencha os dados:
+   - Nome, BI, NUIT, Contacto
+   - **Permanência:** Número de dias
+   - **Valor a Pagar:** Calculado automaticamente
+   - **Número da Conta:** Gerado automaticamente (6 dígitos)
+5. Selecione a casa onde ficará hospedado
+6. Confirme o registo
+
+### Criar Reserva
+
+1. Vá em "Hospedagem" → "Reservas"
+2. Clique em "Nova Reserva"
+3. **Selecione o hóspede**:
+   - Escolha hóspede já registado, OU
+   - Clique em "Adicionar Novo Hóspede" para registo rápido
+4. **Selecione as datas** de check-in e check-out
+5. **Escolha a casa** disponível (carregada dinamicamente)
+6. **Confirme a reserva**:
+   - Valor calculado automaticamente
+   - Casa marcada como ocupada
+   - Reserva associada ao hóspede
+
+### Processo de Check-in/Check-out
+
+1. **Check-in:**
+   - Vá em "Hospedagem" → "Check-ins Pendentes"
+   - Selecione a reserva
+   - Confirme o check-in
+   - Casa marcada como ocupada
+
+2. **Check-out:**
+   - Vá em "Hospedagem" → "Check-outs Pendentes"
+   - Selecione o hóspede
+   - Registre o check-out
+   - Casa marcada como disponível
 
 ### Adicionar Casa
 
@@ -142,15 +192,6 @@ caminhos/
 2. Clique em "Nova Casa"
 3. Preencha todas as informações
 4. Adicione imagens se desejar
-
-### Criar Reserva
-
-1. Vá em "Gestão de Reservas"
-2. Clique em "Nova Reserva"
-3. Selecione as datas
-4. Escolha uma casa disponível
-5. Selecione o cliente
-6. Confirme a reserva
 
 ## 📊 Relatórios
 
@@ -203,6 +244,20 @@ Edite o ficheiro `assets/css/style.css` e modifique as variáveis CSS:
 3. Atualize os helpers de autenticação
 4. Ajuste as permissões nos controladores
 
+## 🔄 Fluxo de Trabalho Integrado
+
+### Novo Hóspede → Reserva
+1. **Registar Hóspede:** Dados completos + casa + cálculo automático
+2. **Criar Reserva:** Associar hóspede existente a nova casa
+3. **Check-in:** Ativar estadia na casa
+4. **Check-out:** Finalizar estadia e liberar casa
+
+### Gestão Automática
+- ✅ **Disponibilidade:** Casas marcadas automaticamente
+- ✅ **Valores:** Cálculo progressivo (diário/semanal/mensal)
+- ✅ **Associação:** Reserva ↔ Hóspede ↔ Casa
+- ✅ **Estados:** Atualização automática de estados
+
 ## 🚨 Solução de Problemas
 
 ### Erro de Conexão
@@ -234,3 +289,4 @@ Este sistema foi desenvolvido para fins educativos e pode ser modificado conform
 
 **Desenvolvido com PHP puro, MySQL, HTML5, CSS3 e JavaScript**
 **Compatível com WAMP (Apache + MySQL + PHP)**
+**🆕 Sistema Integrado de Hóspedes e Reservas**

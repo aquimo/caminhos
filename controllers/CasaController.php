@@ -7,6 +7,7 @@ require_once 'models/CasaModel.php';
 require_once 'models/LocalizacaoModel.php';
 require_once 'helpers/auth_helper.php';
 require_once 'helpers/url_helper.php';
+require_once 'helpers/session_helper.php';
 
 class CasaController {
     
@@ -15,7 +16,7 @@ class CasaController {
      */
     public function index() {
         AuthHelper::requireAuth();
-        AuthHelper::requirePermission('casas');
+        AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
         $casaModel = new CasaModel();
         $localizacaoModel = new LocalizacaoModel();
@@ -67,7 +68,7 @@ class CasaController {
      */
     public function criar() {
         AuthHelper::requireAuth();
-        AuthHelper::requirePermission('casas');
+        AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
         $localizacaoModel = new LocalizacaoModel();
         $localizacoes = $localizacaoModel->getAll();
@@ -145,7 +146,7 @@ class CasaController {
      */
     public function editar() {
         AuthHelper::requireAuth();
-        AuthHelper::requirePermission('casas');
+        AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
         $id = $_GET['id'] ?? null;
         if (!$id) {
@@ -238,7 +239,7 @@ class CasaController {
      */
     public function apagar() {
         AuthHelper::requireAuth();
-        AuthHelper::requirePermission('casas');
+        AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
         $id = $_GET['id'] ?? null;
         if (!$id) {
@@ -262,7 +263,7 @@ class CasaController {
      */
     public function ver() {
         AuthHelper::requireAuth();
-        AuthHelper::requirePermission('casas');
+        AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
         $id = $_GET['id'] ?? null;
         if (!$id) {

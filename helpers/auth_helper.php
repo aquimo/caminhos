@@ -53,6 +53,16 @@ class AuthHelper {
             return true;
         }
         
+        // Se for array, verifica se tem alguma das permissões
+        if (is_array($requiredProfile)) {
+            foreach ($requiredProfile as $profile) {
+                if (self::hasPermission($profile)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
         // Verificar permissões específicas
         $permissions = [
             'secretaria' => ['secretaria', 'checkin', 'checkout'],

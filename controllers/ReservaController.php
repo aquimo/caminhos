@@ -4,9 +4,11 @@
  */
 
 require_once 'models/ReservaModel.php';
+require_once 'models/HospedeModel.php';
 require_once 'models/CasaModel.php';
 require_once 'models/ClienteModel.php';
 require_once 'helpers/auth_helper.php';
+require_once 'helpers/session_helper.php';
 require_once 'helpers/url_helper.php';
 
 class ReservaController {
@@ -19,7 +21,6 @@ class ReservaController {
         AuthHelper::requirePermission('reservas');
         
         $reservaModel = new ReservaModel();
-        $casaModel = new CasaModel();
         
         // Filtros
         $estado = $_GET['estado'] ?? null;
@@ -74,33 +75,42 @@ class ReservaController {
         
         // Validação
         $errors = $this->validateReservaData($data);
-        if (!empty($errors)) {
-            SessionHelper::setFlash('error', implode('<br>', $errors));
-            $this->showCreateForm([], [], $data);
-            return;
-        }
         
-        $reservaModel = new ReservaModel();
-        $casaModel = new CasaModel();
-        
-        // Verificar disponibilidade
-        if (!$reservaModel->verificarDisponibilidade($data['casa_id'], $data['data_checkin'], $data['data_checkout'])) {
-            SessionHelper::setFlash('error', 'A casa não está disponível para as datas selecionadas.');
-            $this->showCreateForm([], [], $data);
-            return;
-        }
-        
-        if ($reservaModel->create($data)) {
-            // Atualizar estado da casa para ocupado se a reserva começar hoje
-            if ($data['data_checkin'] <= date('Y-m-d')) {
-                $casaModel->updateEstado($data['casa_id'], 'ocupado');
-            }
+        if (empty($errors)) {
+            // Obter dados do hóspede e casa
+            $hospedeModel = new HospedeModel();
+            $hospede = $hospedeModel->findById($data['hospede_id']);
+            $casaModel = new CasaModel();
+            $casa = $casaModel->findById($data['casa_id']);
             
-            SessionHelper::setFlash('success', 'Reserva criada com sucesso!');
-            UrlHelper::redirect('reservas');
+            if (!$hospede) {
+                SessionHelper::setFlash('error', 'Hóspede não encontrado.');
+            } elseif (!$casa) {
+                SessionHelper::setFlash('error', 'Casa não encontrada.');
+            } else {
+                // Preparar dados para a reserva
+                $data['cliente_id'] = $hospede['id'];
+                $data['valor_total'] = $this->calcularValorTotal($casa, $data['data_checkin'], $data['data_checkout']);
+                $data['valor_pago'] = 0;
+                $data['estado'] = 'confirmada';
+                
+                // Criar reserva
+                $reservaModel = new ReservaModel();
+                
+                if ($reservaModel->create($data)) {
+                    // Atualizar estado da casa para ocupado se a reserva começar hoje
+                    if ($data['data_checkin'] <= date('Y-m-d')) {
+                        $casaModel->updateEstado($data['casa_id'], 'ocupado');
+                    }
+                    
+                    SessionHelper::setFlash('success', 'Reserva criada com sucesso!');
+                    UrlHelper::redirect('reservas');
+                } else {
+                    SessionHelper::setFlash('error', 'Erro ao criar reserva. Tente novamente.');
+                }
+            }
         } else {
-            SessionHelper::setFlash('error', 'Erro ao criar reserva. Tente novamente.');
-            $this->showCreateForm([], [], $data);
+            SessionHelper::setFlash('error', implode('<br>', $errors));
         }
     }
     
@@ -108,16 +118,6 @@ class ReservaController {
      * Mostrar formulário de criação
      */
     private function showCreateForm($casas = [], $clientes = [], $data = []) {
-        if (empty($casas)) {
-            $casaModel = new CasaModel();
-            $casas = $casaModel->getAll();
-        }
-        
-        if (empty($clientes)) {
-            $clienteModel = new ClienteModel();
-            $clientes = $clienteModel->getAll();
-        }
-        
         $page_title = 'Criar Reserva';
         ob_start();
         include 'views/reservas/criar.php';
@@ -125,9 +125,6 @@ class ReservaController {
         include 'views/layouts/main.php';
     }
     
-    /**
-     * Ver detalhes da reserva
-     */
     public function ver() {
         AuthHelper::requireAuth();
         AuthHelper::requirePermission('reservas');
@@ -145,6 +142,10 @@ class ReservaController {
             SessionHelper::setFlash('error', 'Reserva não encontrada.');
             UrlHelper::redirect('reservas');
         }
+        
+        // Obter dados do hóspede associado
+        $hospedeModel = new HospedeModel();
+        $hospede = $hospedeModel->findById($reserva['hospede_id']);
         
         $page_title = 'Detalhes da Reserva';
         ob_start();
@@ -338,6 +339,35 @@ class ReservaController {
         }
         
         return $errors;
+    }
+    
+    /**
+     * Calcular valor total da reserva
+     */
+    private function calcularValorTotal($casa, $dataCheckin, $dataCheckout) {
+        $checkin = new DateTime($dataCheckin);
+        $checkout = new DateTime($dataCheckout);
+        $numeroNoites = $checkout->diff($checkin)->days;
+        
+        $valorTotal = 0;
+        
+        // Lógica de preços progressivos
+        if ($numeroNoites >= 30) {
+            // Usar preço mensal para 30+ dias
+            $meses = floor($numeroNoites / 30);
+            $diasRestantes = $numeroNoites % 30;
+            $valorTotal = ($meses * $casa['preco_mensal']) + ($diasRestantes * $casa['preco_diario']);
+        } else if ($numeroNoites >= 7) {
+            // Usar preço semanal para 7+ dias
+            $semanas = floor($numeroNoites / 7);
+            $diasRestantes = $numeroNoites % 7;
+            $valorTotal = ($semanas * $casa['preco_semanal']) + ($diasRestantes * $casa['preco_diario']);
+        } else {
+            // Usar preço diário para menos de 7 dias
+            $valorTotal = $numeroNoites * $casa['preco_diario'];
+        }
+        
+        return $valorTotal;
     }
     
     /**

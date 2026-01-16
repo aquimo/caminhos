@@ -27,6 +27,15 @@
                 <a href="<?php echo UrlHelper::base('utilizadores'); ?>" class="menu-item <?php echo UrlHelper::isCurrent('utilizadores') ? 'active' : ''; ?>">
                     <i>👥</i> Utilizadores
                 </a>
+                <?php if (AuthHelper::hasProfile('gestor_geral') || AuthHelper::hasProfile('secretaria')): ?>
+                <div class="menu-subtitle">Hospedagem</div>
+                <a href="<?php echo UrlHelper::base('hospedes'); ?>" class="menu-item <?php echo UrlHelper::isCurrent('hospedes') ? 'active' : ''; ?>">
+                    <i>👥</i> Hóspedes
+                </a>
+                <a href="<?php echo UrlHelper::base('reservas'); ?>" class="menu-item <?php echo UrlHelper::isCurrent('reservas') ? 'active' : ''; ?>">
+                    <i>📅</i> Reservas
+                </a>
+                <?php endif; ?>
                 <?php endif; ?>
                 
                 <?php if (AuthHelper::hasProfile('gestor_geral') || AuthHelper::hasProfile('gestor_condominios')): ?>

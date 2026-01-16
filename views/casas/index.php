@@ -128,15 +128,15 @@
                                 </td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="<?php echo UrlHelper::base('casas/ver?id=' . $casa['id']); ?>" 
+                                        <a href="index.php?route=casas/ver&id=<?php echo $casa['id']; ?>" 
                                            class="btn btn-sm btn-secondary" title="Ver Detalhes">
                                             <i>👁️</i>
                                         </a>
-                                        <a href="<?php echo UrlHelper::base('casas/editar?id=' . $casa['id']); ?>" 
+                                        <a href="index.php?route=casas/editar&id=<?php echo $casa['id']; ?>" 
                                            class="btn btn-sm btn-primary" title="Editar">
                                             <i>✏️</i>
                                         </a>
-                                        <a href="<?php echo UrlHelper::base('casas/apagar?id=' . $casa['id']); ?>" 
+                                        <a href="index.php?route=casas/apagar&id=<?php echo $casa['id']; ?>" 
                                            class="btn btn-sm btn-danger" 
                                            onclick="return confirm('Tem certeza que deseja apagar esta casa?')" 
                                            title="Apagar">

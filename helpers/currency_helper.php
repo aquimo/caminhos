@@ -13,7 +13,11 @@
  * @return string Valor formatado
  */
 function formatCurrency($amount, $decimals = 2) {
-    return number_format($amount, $decimals, ',', ' ') . ' MZN';
+    // Verificar se o valor é nulo ou inválido
+    if ($amount === null || $amount === '') {
+        $amount = 0;
+    }
+    return number_format((float)$amount, $decimals, ',', ' ') . ' MZN';
 }
 
 /**
@@ -23,7 +27,11 @@ function formatCurrency($amount, $decimals = 2) {
  * @return string Valor formatado sem símbolo
  */
 function formatCurrencyChart($amount, $decimals = 2) {
-    return number_format($amount, $decimals, ',', ' ');
+    // Verificar se o valor é nulo ou inválido
+    if ($amount === null || $amount === '') {
+        $amount = 0;
+    }
+    return number_format((float)$amount, $decimals, ',', ' ');
 }
 
 /**

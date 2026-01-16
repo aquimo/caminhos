@@ -1,48 +1,69 @@
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Criar Nova Reserva</h3>
-        <a href="<?php echo UrlHelper::base('reservas'); ?>" class="btn btn-secondary">
+        <h3 class="card-title">Nova Reserva</h3>
+        <a href="index.php?route=reservas" class="btn btn-secondary">
             <i>←</i> Voltar
         </a>
     </div>
     <div class="card-body">
+        <?php if (SessionHelper::hasFlash('error')): ?>
+            <div class="alert alert-error">
+                <?php echo SessionHelper::getFlash('error'); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (SessionHelper::hasFlash('success')): ?>
+            <div class="alert alert-success">
+                <?php echo SessionHelper::getFlash('success'); ?>
+            </div>
+        <?php endif; ?>
+        
         <form method="POST" id="reservaForm">
             <div class="form-row">
                 <div class="form-group">
-                    <label for="data_checkin" class="form-label">Data de Check-in *</label>
-                    <input type="date" id="data_checkin" name="data_checkin" class="form-control" 
-                           required data-min-today
-                           value="<?php echo htmlspecialchars($data['data_checkin'] ?? ''); ?>">
+                    <label for="hospede_id" class="form-label">Hóspede *</label>
+                    <select id="hospede_id" name="hospede_id" class="form-control" required>
+                        <option value="">Selecione um hóspede...</option>
+                        <?php 
+                        $hospedeModel = new HospedeModel();
+                        $hospedes_ativos = $hospedeModel->getAtivos();
+                        foreach ($hospedes_ativos as $hospede): 
+                        ?>
+                            <option value="<?php echo $hospede['id']; ?>">
+                                <?php echo htmlspecialchars($hospede['nome'] . ' - ' . $hospede['numero_conta']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Selecione um hóspede já registado no sistema
+                    </small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="data_checkout" class="form-label">Data de Check-out *</label>
-                    <input type="date" id="data_checkout" name="data_checkout" class="form-control" 
-                           required
-                           value="<?php echo htmlspecialchars($data['data_checkout'] ?? ''); ?>">
+                    <label for="data_checkin" class="form-label">Data de Check-in *</label>
+                    <input type="datetime-local" id="data_checkin" name="data_checkin" class="form-control" 
+                           required data-min-today
+                           value="<?php echo htmlspecialchars($data['data_checkin'] ?? ''); ?>">
                 </div>
             </div>
             
-            <div class="form-group">
-                <label for="casa_id" class="form-label">Casa *</label>
-                <select id="casa_id" name="casa_id" class="form-control" required>
-                    <option value="">Selecione primeiro as datas</option>
-                </select>
-                <small style="color: #666;">As casas disponíveis aparecerão após selecionar as datas</small>
-            </div>
-            
-            <div class="form-group">
-                <label for="cliente_id" class="form-label">Cliente *</label>
-                <select id="cliente_id" name="cliente_id" class="form-control" required>
-                    <option value="">Selecione...</option>
-                    <?php foreach ($clientes as $cliente): ?>
-                        <option value="<?php echo $cliente['id']; ?>"
-                                <?php echo (isset($data['cliente_id']) && $data['cliente_id'] == $cliente['id']) ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($cliente['nome'] . ' - ' . $cliente['email']); ?>
-                        </option>
-                    <?php endforeach; ?>
-                </select>
-                <small style="color: #666;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="data_checkout" class="form-label">Data de Check-out *</label>
+                    <input type="datetime-local" id="data_checkout" name="data_checkout" class="form-control" 
+                           required
+                           value="<?php echo htmlspecialchars($data['data_checkout'] ?? ''); ?>">
+                </div>
+                
+                <div class="form-group">
+                    <label for="casa_id" class="form-label">Casa *</label>
+                    <select id="casa_id" name="casa_id" class="form-control" required>
+                        <option value="">Selecione uma casa...</option>
+                    </select>
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Casas disponíveis serão carregadas automaticamente
+                    </small>
+                </div>
                     <a href="#" onclick="alert('Funcionalidade de criar cliente rápido será implementada em breve.')" style="color: #667eea;">
                         + Criar novo cliente
                     </a>

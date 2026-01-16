@@ -121,6 +121,31 @@ CREATE TABLE despesas (
     FOREIGN KEY (utilizador_id) REFERENCES utilizadores(id) ON DELETE RESTRICT
 );
 
+-- Tabela de hóspedes
+CREATE TABLE hospedes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    procedencia VARCHAR(100) NOT NULL,
+    endereco TEXT NOT NULL,
+    contacto VARCHAR(50) NOT NULL,
+    previsao_permanencia VARCHAR(50) NOT NULL,
+    data_checkin DATETIME NOT NULL,
+    casa_id INT NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    numero_conta VARCHAR(50) NOT NULL,
+    nome_conta VARCHAR(100) NOT NULL,
+    valor_pagar DECIMAL(10,2) NOT NULL,
+    valor_pago DECIMAL(10,2) DEFAULT 0,
+    estado ENUM('ativo', 'checkout_realizado', 'cancelado') DEFAULT 'ativo',
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    data_checkout DATETIME,
+    utilizador_checkin INT,
+    utilizador_checkout INT,
+    FOREIGN KEY (casa_id) REFERENCES casas(id) ON DELETE RESTRICT,
+    FOREIGN KEY (utilizador_checkin) REFERENCES utilizadores(id) ON DELETE SET NULL,
+    FOREIGN KEY (utilizador_checkout) REFERENCES utilizadores(id) ON DELETE SET NULL
+);
+
 -- Tabela de logs do sistema
 CREATE TABLE logs_sistema (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -157,6 +182,9 @@ CREATE INDEX idx_reservas_cliente ON reservas(cliente_id);
 CREATE INDEX idx_reservas_datas ON reservas(data_checkin, data_checkout);
 CREATE INDEX idx_reservas_estado ON reservas(estado);
 CREATE INDEX idx_pagamentos_reserva ON pagamentos(reserva_id);
+CREATE INDEX idx_hospedes_casa ON hospedes(casa_id);
+CREATE INDEX idx_hospedes_estado ON hospedes(estado);
+CREATE INDEX idx_hospedes_checkin ON hospedes(data_checkin);
 CREATE INDEX idx_despesas_casa ON despesas(casa_id);
 CREATE INDEX idx_despesas_data ON despesas(data_despesa);
 CREATE INDEX idx_logs_utilizador ON logs_sistema(utilizador_id);

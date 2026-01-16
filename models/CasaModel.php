@@ -280,12 +280,27 @@ class CasaModel {
      * Atualizar estado da casa
      */
     public function updateEstado($id, $estado) {
+        $stmt = $this->db->prepare("UPDATE casas SET estado = ? WHERE id = ?");
+        return $stmt->execute([$estado, $id]);
+    }
+    
+    /**
+     * Calcular valor total da reserva
+     */
+    public function calcularValorTotal($id, $dataCheckin, $dataCheckout) {
         $stmt = $this->db->prepare("
-            UPDATE casas 
-            SET estado = ?, data_atualizacao = CURRENT_TIMESTAMP 
+            SELECT preco_diario, preco_semanal, preco_mensal 
+            FROM casas 
             WHERE id = ?
         ");
-        return $stmt->execute([$estado, $id]);
+        $stmt->execute([$id]);
+        $casa = $stmt->fetch();
+        
+        // Calcular valor total da reserva
+        $valorTotal = 0;
+        // ...
+        
+        return $valorTotal;
     }
     
     /**

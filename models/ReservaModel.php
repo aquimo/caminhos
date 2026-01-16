@@ -332,6 +332,25 @@ class ReservaModel {
     }
     
     /**
+     * Obter reservas pendentes (pagamentos em atraso)
+     */
+    public function getPendentes() {
+        $stmt = $this->db->prepare("
+            SELECT r.*, 
+                   c.nome as cliente_nome, c.telefone as cliente_telefone,
+                   ca.nome as casa_nome, ca.codigo as casa_codigo
+            FROM reservas r
+            JOIN clientes c ON r.cliente_id = c.id
+            JOIN casas ca ON r.casa_id = ca.id
+            WHERE r.valor_pago < r.valor_total
+            AND r.data_checkout < CURDATE()
+            ORDER BY r.data_checkout ASC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+    
+    /**
      * Calcular valor total da reserva
      */
     private function calcularValorTotal($casa, $numeroNoites) {

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Criar Nova Casa</h3>
-        <a href="<?php echo UrlHelper::base('casas'); ?>" class="btn btn-secondary">
+        <a href="index.php?route=casas" class="btn btn-secondary">
             <i>←</i> Voltar
         </a>
     </div>
@@ -154,7 +154,7 @@
                 <button type="submit" class="btn btn-primary">
                     <i>💾</i> Criar Casa
                 </button>
-                <a href="<?php echo UrlHelper::base('casas'); ?>" class="btn btn-secondary">
+                <a href="index.php?route=casas" class="btn btn-secondary">
                     <i>❌</i> Cancelar
                 </a>
             </div>

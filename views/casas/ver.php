@@ -2,10 +2,10 @@
     <div class="card-header">
         <h3 class="card-title"><?php echo htmlspecialchars($casa['nome']); ?></h3>
         <div class="btn-group">
-            <a href="<?php echo UrlHelper::base('casas/editar?id=' . $casa['id']); ?>" class="btn btn-primary">
+            <a href="index.php?route=casas/editar&id=<?php echo $casa['id']; ?>" class="btn btn-primary">
                 <i>✏️</i> Editar
             </a>
-            <a href="<?php echo UrlHelper::base('casas'); ?>" class="btn btn-secondary">
+            <a href="index.php?route=casas" class="btn btn-secondary">
                 <i>←</i> Voltar
             </a>
         </div>
@@ -25,7 +25,7 @@
                     <strong style="color: #666;">Localização:</strong><br>
                     <?php echo htmlspecialchars($casa['localizacao_nome']); ?><br>
                     <small style="color: #666;"><?php echo htmlspecialchars($casa['endereco']); ?></small><br>
-                    <small style="color: #666;"><?php echo htmlspecialchars($casa['codigo_postal'] . ' ' . $casa['cidade']); ?></small>
+                    <small style="color: #666;"><?php echo htmlspecialchars($casa['cidade']); ?>, <?php echo htmlspecialchars($casa['codigo_postal'] ?? ''); ?></small>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
@@ -118,11 +118,18 @@
         <?php endif; ?>
         
         <!-- Comodidades -->
-        <?php if (!empty($casa['comodidades'])): ?>
+        <?php 
+        $comodidades = $casa['comodidades'];
+        // Se já for array, usa diretamente, senão faz decode do JSON
+        if (is_string($comodidades)) {
+            $comodidades = json_decode($comodidades, true);
+        }
+        if (!empty($comodidades)): 
+        ?>
         <div style="margin-top: 30px;">
             <h4 style="margin-bottom: 15px; color: #333;">Comodidades</h4>
             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <?php foreach ($casa['comodidades'] as $comodidade): ?>
+                <?php foreach ($comodidades as $comodidade): ?>
                     <span class="badge badge-info" style="font-size: 0.9rem; padding: 6px 12px;">
                         <?php echo htmlspecialchars($comodidade); ?>
                     </span>
@@ -132,11 +139,18 @@
         <?php endif; ?>
         
         <!-- Imagens -->
-        <?php if (!empty($casa['imagens'])): ?>
+        <?php 
+        $imagens = $casa['imagens'];
+        // Se já for array, usa diretamente, senão faz decode do JSON
+        if (is_string($imagens)) {
+            $imagens = json_decode($imagens, true);
+        }
+        if (!empty($imagens)): 
+        ?>
         <div style="margin-top: 30px;">
             <h4 style="margin-bottom: 15px; color: #333;">Imagens</h4>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                <?php foreach ($casa['imagens'] as $imagem): ?>
+                <?php foreach ($imagens as $imagem): ?>
                     <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
                         <img src="<?php echo UrlHelper::asset($imagem); ?>" 
                              style="width: 100%; height: 200px; object-fit: cover; display: block;"
