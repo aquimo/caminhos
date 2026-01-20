@@ -163,15 +163,15 @@ CREATE TABLE logs_sistema (
 INSERT INTO utilizadores (nome, email, senha, perfil) VALUES 
 ('Administrador', 'admin@caminhos.pt', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'gestor_geral');
 
--- Inserir localização de exemplo
+-- Inserir localização de exemplo (apenas Cidade de Inhambane e Tofo)
 INSERT INTO localizacoes (nome, endereco, cidade, codigo_postal, descricao) VALUES 
-('Cidade', 'Avenida Principal, nº 123', 'Maputo', '1100', 'Localização na cidade com excelente acesso'),
+('Cidade de Inhambane', 'Avenida Samora Machel, nº 123', 'Inhambane', '1100', 'Localização na cidade de Inhambane com excelente acesso'),
 ('Tofo', 'Estrada Nacional, nº 456', 'Tofo', '2100', 'Localização em Tofo com vista para o mar');
 
 -- Inserir casas de exemplo
 INSERT INTO casas (codigo, localizacao_id, nome, descricao, tipologia, capacidade, area_decimal, preco_diario, preco_semanal, preco_mensal, estado, comodidades, imagens) VALUES 
-('CASA001', 1, 'Apartamento T1 Cidade', 'Apartamento T1 com varanda e vista para a cidade', 'T1', 2, 45.50, 75.00, 450.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]', '[]'),
-('CASA002', 1, 'Apartamento T2 Cidade', 'Apartamento T2 espaçoso com 2 quartos', 'T2', 4, 65.00, 95.00, 570.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]', '[]'),
+('CASA001', 1, 'Apartamento T1 Cidade de Inhambane', 'Apartamento T1 com varanda e vista para a cidade de Inhambane', 'T1', 2, 45.50, 75.00, 450.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]', '[]'),
+('CASA002', 1, 'Apartamento T2 Cidade de Inhambane', 'Apartamento T2 espaçoso com 2 quartos na cidade de Inhambane', 'T2', 4, 65.00, 95.00, 570.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]', '[]'),
 ('CASA003', 2, 'Casa de Praia Tofo', 'Casa de 3 quartos com vista para o mar', 'T3', 6, 120.00, 180.00, 1080.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Cozinha Equipada", "Churrasqueiro", "Piscina"]', '[]');
 
 -- Índices para melhor performance

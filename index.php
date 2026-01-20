@@ -28,10 +28,12 @@ require_once 'helpers/currency_helper.php';
 SessionHelper::init();
 
 // Obter a rota da URL
-$route = isset($_GET['route']) ? $_GET['route'] : 'dashboard';
+$route = isset($_GET['route']) ? $_GET['route'] : '';
 
 // Rotas da aplicação
 $routes = [
+    '' => 'HomeController@index',  // Página inicial padrão
+    'home' => 'HomeController@index',
     'dashboard' => 'DashboardController@index',
     'login' => 'AuthController@login',
     'logout' => 'AuthController@logout',
@@ -58,8 +60,8 @@ $routes = [
     'relatorios/ocupacao' => 'RelatorioController@ocupacao'
 ];
 
-// Verificar se o utilizador está autenticado (exceto para login)
-if ($route !== 'login' && !AuthHelper::isLoggedIn()) {
+// Verificar se o utilizador está autenticado (exceto para login e página inicial)
+if ($route !== 'login' && $route !== '' && $route !== 'home' && !AuthHelper::isLoggedIn()) {
     header('Location: index.php?route=login');
     exit;
 }

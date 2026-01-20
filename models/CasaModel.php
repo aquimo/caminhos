@@ -321,5 +321,26 @@ class CasaModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
+    
+    /**
+     * Obter casas para página inicial
+     */
+    public function getCasasParaHome() {
+        $sql = "
+            SELECT DISTINCT tipologia, 
+                   COUNT(*) as quantidade,
+                   AVG(preco_diario) as preco_medio
+            FROM casas 
+            WHERE estado = 'disponivel'
+            AND tipologia IS NOT NULL
+            GROUP BY tipologia
+            ORDER BY tipologia
+        ";
+        
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>

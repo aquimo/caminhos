@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="procedencia" class="form-label">Procedência *</label>
                     <input type="text" id="procedencia" name="procedencia" class="form-control" 
-                           placeholder="Ex: Maputo, Matola, etc." required
+                           placeholder="Ex: Inhambane, Maxixe, etc." required
                            value="<?php echo htmlspecialchars($_POST['procedencia'] ?? ''); ?>">
                 </div>
             </div>
