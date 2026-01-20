@@ -174,16 +174,16 @@ INSERT INTO localizacoes (nome, endereco, cidade, codigo_postal, descricao) VALU
 ('Cidade de Inhambane', 'Avenida Samora Machel, nº 123', 'Inhambane', '1100', 'Localização na cidade de Inhambane com excelente acesso'),
 ('Tofo', 'Estrada Nacional, nº 456', 'Tofo', '2100', 'Localização em Tofo com vista para o mar');
 
--- Inserir casas atualizadas (apenas Cidade de Inhambane e Tofo)
+-- Inserir casas atualizadas (apenas Cidade de Inhambane e Tofo) - Valores em MZN
 INSERT INTO casas (codigo, localizacao_id, nome, descricao, tipologia, capacidade, area_decimal, preco_diario, preco_semanal, preco_mensal, estado, comodidades, imagens) VALUES 
-('CASA001', 1, 'Apartamento T1 Cidade de Inhambane', 'Apartamento T1 com varanda e vista para a cidade de Inhambane', 'T1', 2, 45.50, 75.00, 450.00, 1350.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]', '[]'),
-('CASA002', 1, 'Apartamento T2 Cidade de Inhambane', 'Apartamento T2 espaçoso com 2 quartos na cidade de Inhambane', 'T2', 4, 65.00, 95.00, 570.00, 1710.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]', '[]'),
-('CASA003', 1, 'Apartamento T3 Cidade de Inhambane', 'Apartamento T3 familiar na cidade de Inhambane', 'T3', 6, 85.00, 120.00, 720.00, 2160.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa", "Frigorífico"]', '[]'),
-('CASA004', 2, 'Casa de Praia Tofo', 'Casa de 3 quartos com vista para o mar em Tofo', 'T3', 6, 120.00, 180.00, 1080.00, 3240.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Cozinha Equipada", "Churrasqueiro", "Piscina"]', '[]'),
-('CASA005', 2, 'Apartamento T2 Tofo', 'Apartamento T2 em Tofo perto da praia', 'T2', 4, 55.00, 150.00, 900.00, 2700.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Varanda"]', '[]'),
-('CASA006', 1, 'Apartamento T0 Cidade de Inhambane', 'Quarto individual na cidade de Inhambane', 'T0', 1, 25.00, 50.00, 300.00, 900.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado"]', '[]'),
-('CASA007', 2, 'Apartamento T1 Tofo', 'Apartamento T1 em Tofo com vista para o mar', 'T1', 2, 40.00, 80.00, 480.00, 1440.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Varanda"]', '[]'),
-('CASA008', 1, 'Apartamento T4 Cidade de Inhambane', 'Apartamento T4 espaçoso para famílias grandes na cidade de Inhambane', 'T4', 8, 110.00, 140.00, 840.00, 2520.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Roupa", "Frigorífico", "Cozinha Equipada"]', '[]');
+('CASA001', 1, 'Apartamento T1 Cidade de Inhambane', 'Apartamento T1 com varanda e vista para a cidade de Inhambane', 'T1', 2, 45.50, 2500.00, 15000.00, 45000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça"]', '[]'),
+('CASA002', 1, 'Apartamento T2 Cidade de Inhambane', 'Apartamento T2 espaçoso com 2 quartos na cidade de Inhambane', 'T2', 4, 65.00, 3500.00, 21000.00, 63000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa"]', '[]'),
+('CASA003', 1, 'Apartamento T3 Cidade de Inhambane', 'Apartamento T3 familiar na cidade de Inhambane', 'T3', 6, 85.00, 4500.00, 27000.00, 81000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Louça", "Máquina de Lavar Roupa", "Frigorífico"]', '[]'),
+('CASA004', 2, 'Casa de Praia Tofo', 'Casa de 3 quartos com vista para o mar em Tofo', 'T3', 6, 120.00, 6500.00, 39000.00, 117000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Cozinha Equipada", "Churrasqueiro", "Piscina"]', '[]'),
+('CASA005', 2, 'Apartamento T2 Tofo', 'Apartamento T2 em Tofo perto da praia', 'T2', 4, 55.00, 4000.00, 24000.00, 72000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Varanda"]', '[]'),
+('CASA006', 1, 'Apartamento T0 Cidade de Inhambane', 'Quarto individual na cidade de Inhambane', 'T0', 1, 25.00, 1500.00, 9000.00, 27000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado"]', '[]'),
+('CASA007', 2, 'Apartamento T1 Tofo', 'Apartamento T1 em Tofo com vista para o mar', 'T1', 2, 40.00, 2000.00, 12000.00, 36000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Varanda"]', '[]'),
+('CASA008', 1, 'Apartamento T4 Cidade de Inhambane', 'Apartamento T4 espaçoso para famílias grandes na cidade de Inhambane', 'T4', 8, 110.00, 5500.00, 33000.00, 99000.00, 'disponivel', '["WiFi", "TV", "Ar Condicionado", "Máquina de Lavar Roupa", "Frigorífico", "Cozinha Equipada"]', '[]');
 
 -- Inserir clientes de exemplo (apenas Cidade de Inhambane e Tofo)
 INSERT INTO clientes (nome, email, telefone, nif, data_nascimento, morada, codigo_postal, cidade, pais, documento_tipo, documento_numero) VALUES 
@@ -191,16 +191,16 @@ INSERT INTO clientes (nome, email, telefone, nif, data_nascimento, morada, codig
 ('Maria Santos', 'maria.santos@email.com', '+258847654321', '987654321', '1985-08-22', 'Rua da República, nº 789', '2100', 'Tofo', 'Moçambique', 'bi', '987654321B'),
 ('Pedro Nhamptave', 'pedro.n@email.com', '+258842345678', '456789123', '1992-12-10', 'Avenida Samora Machel, nº 123', '1100', 'Inhambane', 'Moçambique', 'bi', '456789123C');
 
--- Inserir algumas reservas de exemplo
+-- Inserir algumas reservas de exemplo - Valores em MZN
 INSERT INTO reservas (casa_id, cliente_id, data_checkin, data_checkout, numero_noites, valor_total, valor_pago, estado, observacoes) VALUES 
-(1, 1, '2026-01-25', '2026-01-28', 3, 225.00, 225.00, 'confirmada', 'Reserva para fim de semana'),
-(4, 2, '2026-02-01', '2026-02-07', 6, 1080.00, 540.00, 'confirmada', 'Férias de verão'),
-(6, 3, '2026-01-20', '2026-01-23', 3, 240.00, 0.00, 'confirmada', 'Viagem de negócios');
+(1, 1, '2026-01-25', '2026-01-28', 3, 7500.00, 7500.00, 'confirmada', 'Reserva para fim de semana'),
+(4, 2, '2026-02-01', '2026-02-07', 6, 39000.00, 19500.00, 'confirmada', 'Férias de verão'),
+(6, 3, '2026-01-20', '2026-01-23', 3, 4500.00, 0.00, 'confirmada', 'Viagem de negócios');
 
--- Inserir pagamentos de exemplo
+-- Inserir pagamentos de exemplo - Valores em MZN
 INSERT INTO pagamentos (reserva_id, valor, metodo_pagamento, referencia, utilizador_id) VALUES 
-(1, 225.00, 'transferencia_bancaria', 'TRF001', 2),
-(2, 540.00, 'mpesa', 'MPS002', 2);
+(1, 7500.00, 'transferencia_bancaria', 'TRF001', 2),
+(2, 19500.00, 'mpesa', 'MPS002', 2);
 
 -- Inserir hóspedes de exemplo
 INSERT INTO hospedes (nome, procedencia, endereco, contacto, previsao_permanencia, data_checkin, casa_id, senha, numero_conta, nome_conta, valor_pagar, valor_pago, utilizador_checkin) VALUES 
