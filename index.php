@@ -34,6 +34,7 @@ $route = isset($_GET['route']) ? $_GET['route'] : '';
 $routes = [
     '' => 'HomeController@index',  // Página inicial padrão
     'home' => 'HomeController@index',
+    'disponibilidade' => 'DisponibilidadeController@index',
     'dashboard' => 'DashboardController@index',
     'login' => 'AuthController@login',
     'logout' => 'AuthController@logout',
@@ -60,8 +61,8 @@ $routes = [
     'relatorios/ocupacao' => 'RelatorioController@ocupacao'
 ];
 
-// Verificar se o utilizador está autenticado (exceto para login e página inicial)
-if ($route !== 'login' && $route !== '' && $route !== 'home' && !AuthHelper::isLoggedIn()) {
+// Verificar se o utilizador está autenticado (exceto para login, página inicial e disponibilidade)
+if ($route !== 'login' && $route !== '' && $route !== 'home' && $route !== 'disponibilidade' && !AuthHelper::isLoggedIn()) {
     header('Location: index.php?route=login');
     exit;
 }

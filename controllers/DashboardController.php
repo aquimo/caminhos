@@ -142,7 +142,7 @@ class DashboardController {
             foreach ($pagamentos as $pagamento) {
                 $activities[] = [
                     'tipo' => 'pagamento',
-                    'descricao' => "Pagamento recebido: {$pagamento['cliente_nome']} - €{$pagamento['valor']}",
+                    'descricao' => "Pagamento recebido: {$pagamento['cliente_nome']} - MZN {$pagamento['valor']}",
                     'data' => $pagamento['data_pagamento'],
                     'estado' => 'completed'
                 ];

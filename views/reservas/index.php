@@ -86,10 +86,10 @@
                                 </td>
                                 <td><?php echo $reserva['numero_noites']; ?></td>
                                 <td>
-                                    <strong>€<?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?></strong><br>
+                                    <strong>MZN <?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?></strong><br>
                                     <?php if ($reserva['valor_pago'] < $reserva['valor_total']): ?>
                                         <small style="color: #dc3545;">
-                                            Pendente: €<?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
+                                            Pendente: MZN <?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
                                         </small>
                                     <?php else: ?>
                                         <small style="color: #28a745;">Pago</small>

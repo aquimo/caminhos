@@ -202,16 +202,16 @@ INSERT INTO pagamentos (reserva_id, valor, metodo_pagamento, referencia, utiliza
 (1, 7500.00, 'transferencia_bancaria', 'TRF001', 2),
 (2, 19500.00, 'mpesa', 'MPS002', 2);
 
--- Inserir hóspedes de exemplo
+-- Inserir hóspedes de exemplo - Valores em MZN
 INSERT INTO hospedes (nome, procedencia, endereco, contacto, previsao_permanencia, data_checkin, casa_id, senha, numero_conta, nome_conta, valor_pagar, valor_pago, utilizador_checkin) VALUES 
-('António Manhiça', 'Maputo', 'Avenida Julius Nyerere, nº 1000', '+258841112223', '7 dias', '2026-01-15 10:00:00', 2, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456', 'António Manhiça', 1050.00, 1050.00, 2),
-('Isabel Chissano', 'Beira', 'Rua da Praia, nº 500', '+258823344556', '5 dias', '2026-01-18 14:30:00', 5, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '234567', 'Isabel Chissano', 750.00, 0.00, 2);
+('António Manhiça', 'Maputo', 'Avenida Julius Nyerere, nº 1000', '+258841112223', '7 dias', '2026-01-15 10:00:00', 2, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '123456', 'António Manhiça', 28000.00, 28000.00, 2),
+('Isabel Chissano', 'Beira', 'Rua da Praia, nº 500', '+258823344556', '5 dias', '2026-01-18 14:30:00', 5, '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '234567', 'Isabel Chissano', 20000.00, 0.00, 2);
 
--- Inserir algumas despesas de exemplo
+-- Inserir algumas despesas de exemplo - Valores em MZN
 INSERT INTO despesas (casa_id, descricao, valor, data_despesa, categoria, fornecedor, documento_fiscal, utilizador_id) VALUES 
-(1, 'Limpeza mensal', 50.00, '2026-01-15', 'limpeza', 'Serviços de Limpeza Lda', 'FAT001', 3),
-(4, 'Reparação ar condicionado', 150.00, '2026-01-10', 'manutencao', 'Ar Frio Lda', 'FAT002', 3),
-(2, 'Conta de electricidade', 200.00, '2026-01-05', 'utilidades', 'EDM', 'FAT003', 3);
+(1, 'Limpeza mensal', 2500.00, '2026-01-15', 'limpeza', 'Serviços de Limpeza Lda', 'FAT001', 3),
+(4, 'Reparação ar condicionado', 7500.00, '2026-01-10', 'manutencao', 'Ar Frio Lda', 'FAT002', 3),
+(2, 'Conta de electricidade', 10000.00, '2026-01-05', 'utilidades', 'EDM', 'FAT003', 3);
 
 -- Índices para melhor performance
 CREATE INDEX idx_casas_localizacao ON casas(localizacao_id);

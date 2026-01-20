@@ -408,7 +408,7 @@
         <section class="availability-section">
             <h2 class="section-title">Verificar Disponibilidade</h2>
             <form class="availability-form" method="GET" action="index.php">
-                <input type="hidden" name="route" value="reservas/criar">
+                <input type="hidden" name="route" value="disponibilidade">
                 
                 <div class="form-group">
                     <label for="localizacao">Localização</label>

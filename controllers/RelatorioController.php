@@ -183,7 +183,7 @@ class RelatorioController {
                 $estatistica['dias_ocupados'],
                 $estatistica['dias_disponiveis'],
                 number_format($estatistica['taxa_ocupacao'], 1) . '%',
-                '€' . number_format($estatistica['receita'], 2, ',', ' ')
+                'MZN ' . number_format($estatistica['receita'], 2, ',', ' ')
             ]);
         }
         

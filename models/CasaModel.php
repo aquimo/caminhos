@@ -199,7 +199,7 @@ class CasaModel {
     /**
      * Obter casas disponíveis para datas específicas
      */
-    public function getDisponiveis($dataCheckin, $dataCheckout, $localizacaoId = null) {
+    public function getDisponiveis($dataCheckin, $dataCheckout, $localizacaoId = null, $tipologia = null) {
         $sql = "
             SELECT c.*, l.nome as localizacao_nome, l.cidade 
             FROM casas c 
@@ -226,6 +226,11 @@ class CasaModel {
         if ($localizacaoId) {
             $sql .= " AND c.localizacao_id = ?";
             $params[] = $localizacaoId;
+        }
+        
+        if ($tipologia) {
+            $sql .= " AND c.tipologia = ?";
+            $params[] = $tipologia;
         }
         
         $sql .= " ORDER BY c.nome";

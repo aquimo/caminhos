@@ -93,21 +93,21 @@
                 <div style="margin-bottom: 15px;">
                     <strong style="color: #666;">Valor Total:</strong><br>
                     <span style="font-size: 1.3rem; font-weight: 600; color: #28a745;">
-                        €<?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?>
+                        MZN <?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?>
                     </span>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <strong style="color: #666;">Valor Pago:</strong><br>
                     <span style="font-size: 1.1rem; font-weight: 600; color: <?php echo ($reserva['valor_pago'] >= $reserva['valor_total']) ? '#28a745' : '#dc3545'; ?>;">
-                        €<?php echo number_format($reserva['valor_pago'], 2, ',', ' '); ?>
+                        MZN <?php echo number_format($reserva['valor_pago'], 2, ',', ' '); ?>
                     </span>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
                     <strong style="color: #666;">Valor Pendente:</strong><br>
                     <span style="font-size: 1.1rem; font-weight: 600; color: <?php echo ($reserva['valor_pago'] < $reserva['valor_total']) ? '#dc3545' : '#28a745'; ?>;">
-                        €<?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
+                        MZN <?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
                     </span>
                 </div>
                 
@@ -115,7 +115,7 @@
                 <div style="margin-bottom: 15px;">
                     <div style="background-color: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; padding: 10px;">
                         <small style="color: #856404;">
-                            <strong>⚠️ Pagamento Pendente:</strong> Ainda falta receber €<?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
+                            <strong>⚠️ Pagamento Pendente:</strong> Ainda falta receber MZN <?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
                         </small>
                     </div>
                 </div>

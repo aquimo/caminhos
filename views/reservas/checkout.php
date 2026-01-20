@@ -57,11 +57,11 @@
                                     <div style="margin-bottom: 15px;">
                                         <strong style="color: #666;">Valor:</strong><br>
                                         <span style="font-size: 1.1rem; font-weight: 600; color: #28a745;">
-                                            €<?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?>
+                                            MZN <?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?>
                                         </span>
                                         <?php if ($reserva['valor_pago'] < $reserva['valor_total']): ?>
                                             <br><small style="color: #dc3545;">
-                                                ⚠️ Pendente: €<?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
+                                                ⚠️ Pendente: MZN <?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
                                             </small>
                                         <?php endif; ?>
                                     </div>
