@@ -4,8 +4,8 @@
  * Sistema de Gestão de Casas para Hospedagem
  * 
  * @author Oscar Massangaia
- * @institution Universidade Aberta ISCED
- * @course Engenharia Informática
+ * @institução Universidade Aberta ISCED
+ * @curso Gestão de Sistemas de Informação
  * @version 1.0
  */
 
@@ -15,7 +15,7 @@ define('CONTROLLERS_PATH', APP_PATH . '/controllers/');
 define('MODELS_PATH', APP_PATH . '/models/');
 define('VIEWS_PATH', APP_PATH . '/views/');
 define('HELPERS_PATH', APP_PATH . '/helpers/');
-define('ASSETS_PATH', '/assets/');
+define('ASSETS_PATH', 'assets/');
 
 // Incluir ficheiros de configuração e helpers
 require_once 'config/database.php';
@@ -44,21 +44,30 @@ $routes = [
     'casas/ver' => 'CasaController@ver',
     'casas/apagar' => 'CasaController@apagar',
     'casas/disponiveis' => 'CasaController@getDisponiveis',
+    'disponibilidade/buscarDisponiveis' => 'DisponibilidadeController@buscarDisponiveis',
     'utilizadores' => 'UtilizadorController@index',
     'utilizadores/criar' => 'UtilizadorController@criar',
     'utilizadores/editar' => 'UtilizadorController@editar',
     'utilizadores/ver' => 'UtilizadorController@ver',
+    'utilizadores/apagar' => 'UtilizadorController@apagar',
     'hospedes' => 'HospedeController@index',
     'hospedes/criar' => 'HospedeController@criar',
     'hospedes/ver' => 'HospedeController@ver',
     'hospedes/checkout' => 'HospedeController@checkout',
     'reservas' => 'ReservaController@index',
     'reservas/criar' => 'ReservaController@criar',
+    'reservas/ver' => 'ReservaController@ver',
+    'reservas/cancelar' => 'ReservaController@cancelar',
     'reservas/checkin' => 'ReservaController@checkin',
+    'reservas/processarCheckin' => 'ReservaController@processarCheckin',
     'reservas/checkout' => 'ReservaController@checkout',
+    'reservas/processarCheckout' => 'ReservaController@processarCheckout',
+    'reservas/getCasasDisponiveis' => 'ReservaController@getCasasDisponiveis',
     'relatorios' => 'RelatorioController@index',
     'relatorios/financeiros' => 'RelatorioController@financeiros',
-    'relatorios/ocupacao' => 'RelatorioController@ocupacao'
+    'relatorios/ocupacao' => 'RelatorioController@ocupacao',
+    'relatorios/exportarFinanceiro' => 'RelatorioController@exportarFinanceiro',
+    'relatorios/exportarOcupacao' => 'RelatorioController@exportarOcupacao'
 ];
 
 // Verificar se o utilizador está autenticado (exceto para login, página inicial e disponibilidade)

@@ -141,6 +141,9 @@ class ReservaController {
             UrlHelper::redirect('reservas');
         }
         
+        // Debug: mostrar o ID recebido
+        error_log("ID recebido no método ver: " . var_export($id, true));
+        
         $reservaModel = new ReservaModel();
         $reserva = $reservaModel->findById($id);
         
@@ -170,6 +173,9 @@ class ReservaController {
         $reservaModel = new ReservaModel();
         $pendentes = $reservaModel->getPendentesCheckin();
         
+        // Debug: mostrar os dados das reservas pendentes
+        error_log("Reservas pendentes de check-in: " . var_export($pendentes, true));
+        
         $page_title = 'Check-ins Pendentes';
         ob_start();
         include 'views/reservas/checkin.php';
@@ -185,6 +191,11 @@ class ReservaController {
         AuthHelper::requirePermission('secretaria');
         
         $id = $_POST['id'] ?? null;
+        
+        // Debug: mostrar o ID recebido e todos os dados POST
+        error_log("Dados POST recebidos em processarCheckin: " . var_export($_POST, true));
+        error_log("ID extraído: " . var_export($id, true));
+        
         if (!$id) {
             SessionHelper::setFlash('error', 'ID da reserva não especificado.');
             UrlHelper::redirect('reservas/checkin');
@@ -260,6 +271,9 @@ class ReservaController {
             SessionHelper::setFlash('error', 'ID da reserva não especificado.');
             UrlHelper::redirect('reservas');
         }
+        
+        // Debug: mostrar o ID recebido
+        error_log("ID recebido no método cancelar: " . var_export($id, true));
         
         $reservaModel = new ReservaModel();
         $casaModel = new CasaModel();

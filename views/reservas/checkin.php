@@ -25,17 +25,17 @@
                         <div class="card-body">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
                                 <div>
-                                    <h5 style="margin: 0; color: #333;"><?php echo htmlspecialchars($reserva['casa_codigo']); ?></h5>
-                                    <small style="color: #666;"><?php echo htmlspecialchars($reserva['casa_nome']); ?></small>
+                                    <h5 style="margin: 0; color: #333;"><?php echo htmlspecialchars($reserva['casa_codigo'] ?? 'N/A'); ?></h5>
+                                    <small style="color: #666;"><?php echo htmlspecialchars($reserva['casa_nome'] ?? 'N/A'); ?></small>
                                 </div>
                                 <span class="badge badge-success">Pendente</span>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
                                 <strong style="color: #666;">Cliente:</strong><br>
-                                <?php echo htmlspecialchars($reserva['cliente_nome']); ?><br>
+                                <?php echo htmlspecialchars($reserva['cliente_nome'] ?? 'N/A'); ?><br>
                                 <small style="color: #666;">
-                                    📧 <?php echo htmlspecialchars($reserva['cliente_email']); ?><br>
+                                    📧 <?php echo htmlspecialchars($reserva['cliente_email'] ?? 'N/A'); ?><br>
                                     <?php if ($reserva['cliente_telefone']): ?>
                                         📱 <?php echo htmlspecialchars($reserva['cliente_telefone']); ?>
                                     <?php endif; ?>
@@ -44,22 +44,22 @@
                             
                             <div style="margin-bottom: 15px;">
                                 <strong style="color: #666;">Período:</strong><br>
-                                📅 <?php echo date('d/m/Y', strtotime($reserva['data_checkin'])); ?> → 
-                                <?php echo date('d/m/Y', strtotime($reserva['data_checkout'])); ?><br>
+                                📅 <?php echo !empty($reserva['data_checkin']) ? date('d/m/Y', strtotime($reserva['data_checkin'])) : 'N/A'; ?> → 
+                                <?php echo !empty($reserva['data_checkout']) ? date('d/m/Y', strtotime($reserva['data_checkout'])) : 'N/A'; ?><br>
                                 <small style="color: #666;">
-                                    🏠 <?php echo htmlspecialchars($reserva['tipologia']); ?> • 
-                                    👥 <?php echo $reserva['capacidade']; ?> pessoa(s)
+                                    🏠 <?php echo htmlspecialchars($reserva['tipologia'] ?? 'N/A'); ?> • 
+                                    👥 <?php echo $reserva['capacidade'] ?? 0; ?> pessoa(s)
                                 </small>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
                                 <strong style="color: #666;">Valor:</strong><br>
                                 <span style="font-size: 1.1rem; font-weight: 600; color: #28a745;">
-                                    MZN <?php echo number_format($reserva['valor_total'], 2, ',', ' '); ?>
+                                    MZN <?php echo number_format($reserva['valor_total'] ?? 0, 2, ',', ' '); ?>
                                 </span>
-                                <?php if ($reserva['valor_pago'] < $reserva['valor_total']): ?>
+                                <?php if (!empty($reserva['valor_pago']) && !empty($reserva['valor_total']) && $reserva['valor_pago'] < $reserva['valor_total']): ?>
                                     <br><small style="color: #dc3545;">
-                                        Pendente: MZN <?php echo number_format($reserva['valor_total'] - $reserva['valor_pago'], 2, ',', ' '); ?>
+                                        Pendente: MZN <?php echo number_format(($reserva['valor_total'] ?? 0) - ($reserva['valor_pago'] ?? 0), 2, ',', ' '); ?>
                                     </small>
                                 <?php endif; ?>
                             </div>
@@ -73,14 +73,14 @@
                             
                             <div style="display: flex; gap: 10px;">
                                 <form method="POST" action="<?php echo UrlHelper::base('reservas/processarCheckin'); ?>" style="flex: 1;">
-                                    <input type="hidden" name="id" value="<?php echo $reserva['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo isset($reserva['id']) ? htmlspecialchars($reserva['id']) : ''; ?>">
                                     <button type="submit" class="btn btn-success" style="width: 100%;" 
-                                            onclick="return confirm('Confirmar check-in para <?php echo htmlspecialchars($reserva['cliente_nome']); ?>?')">
+                                            onclick="return confirm('Confirmar check-in para <?php echo htmlspecialchars($reserva['cliente_nome'] ?? 'Cliente'); ?>?')">
                                         <i>✅</i> Fazer Check-in
                                     </button>
                                 </form>
                                 
-                                <a href="<?php echo UrlHelper::base('reservas/ver?id=' . $reserva['id']); ?>" 
+                                <a href="<?php echo UrlHelper::base('reservas/ver?id=' . (isset($reserva['id']) ? $reserva['id'] : '')); ?>" 
                                    class="btn btn-secondary" title="Ver Detalhes">
                                     <i>👁️</i>
                                 </a>

@@ -16,6 +16,13 @@ require_once 'helpers/url_helper.php';
 require_once 'helpers/session_helper.php';
 
 class CasaController {
+    private $casaModel;
+    private $localizacaoModel;
+    
+    public function __construct() {
+        $this->casaModel = new CasaModel();
+        $this->localizacaoModel = new LocalizacaoModel();
+    }
     
     /**
      * Listar casas
@@ -23,9 +30,6 @@ class CasaController {
     public function index() {
         AuthHelper::requireAuth();
         AuthHelper::requirePermission(['casas', 'gestor_geral']);
-        
-        $casaModel = new CasaModel();
-        $localizacaoModel = new LocalizacaoModel();
         
         // Filtros
         $localizacaoId = $_GET['localizacao_id'] ?? null;
@@ -35,9 +39,9 @@ class CasaController {
         
         // Obter casas
         if ($search) {
-            $casas = $casaModel->search($search, $localizacaoId, $tipologia);
+            $casas = $this->casaModel->search($search, $localizacaoId, $tipologia);
         } else {
-            $casas = $casaModel->getAll();
+            $casas = $this->casaModel->getAll();
         }
         
         // Filtrar resultados
@@ -59,8 +63,8 @@ class CasaController {
             });
         }
         
-        $localizacoes = $localizacaoModel->getAll();
-        $tipologias = $casaModel->getTipologias();
+        $localizacoes = $this->localizacaoModel->getAll();
+        $tipologias = $this->casaModel->getTipologias();
         
         $page_title = 'Gestão de Casas';
         ob_start();
@@ -76,8 +80,8 @@ class CasaController {
         AuthHelper::requireAuth();
         AuthHelper::requirePermission(['casas', 'gestor_geral']);
         
-        $localizacaoModel = new LocalizacaoModel();
-        $localizacoes = $localizacaoModel->getAll();
+        // Obter localizações para o filtro
+        $localizacoes = $this->localizacaoModel->getAll();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processCreate();
@@ -100,10 +104,8 @@ class CasaController {
             return;
         }
         
-        $casaModel = new CasaModel();
-        
         // Verificar se código já existe
-        if ($casaModel->codigoExists($data['codigo'])) {
+        if ($this->casaModel->codigoExists($data['codigo'])) {
             SessionHelper::setFlash('error', 'O código da casa já está em uso.');
             $this->showCreateForm([], $data);
             return;
@@ -122,7 +124,7 @@ class CasaController {
             $data['imagens'] = $this->processUploadImagens($_FILES['imagens']);
         }
         
-        if ($casaModel->create($data)) {
+        if ($this->casaModel->create($data)) {
             SessionHelper::setFlash('success', 'Casa criada com sucesso!');
             UrlHelper::redirect('casas');
         } else {
@@ -136,8 +138,7 @@ class CasaController {
      */
     private function showCreateForm($localizacoes = [], $data = []) {
         if (empty($localizacoes)) {
-            $localizacaoModel = new LocalizacaoModel();
-            $localizacoes = $localizacaoModel->getAll();
+            $localizacoes = $this->localizacaoModel->getAll();
         }
         
         $page_title = 'Criar Casa';
@@ -160,16 +161,13 @@ class CasaController {
             UrlHelper::redirect('casas');
         }
         
-        $casaModel = new CasaModel();
-        $localizacaoModel = new LocalizacaoModel();
-        
-        $casa = $casaModel->findById($id);
+        $casa = $this->casaModel->findById($id);
         if (!$casa) {
             SessionHelper::setFlash('error', 'Casa não encontrada.');
             UrlHelper::redirect('casas');
         }
         
-        $localizacoes = $localizacaoModel->getAll();
+        $localizacoes = $this->localizacaoModel->getAll();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->processEdit($id);
@@ -192,10 +190,8 @@ class CasaController {
             return;
         }
         
-        $casaModel = new CasaModel();
-        
         // Verificar se código já existe (excluindo esta casa)
-        if ($casaModel->codigoExists($data['codigo'], $id)) {
+        if ($this->casaModel->codigoExists($data['codigo'], $id)) {
             SessionHelper::setFlash('error', 'O código da casa já está em uso.');
             UrlHelper::redirect('casas/editar?id=' . $id);
             return;
@@ -211,12 +207,12 @@ class CasaController {
         // Processar imagens novas
         if (isset($_FILES['imagens']) && !empty($_FILES['imagens']['name'][0])) {
             $novasImagens = $this->processUploadImagens($_FILES['imagens']);
-            $casaAtual = $casaModel->findById($id);
+            $casaAtual = $this->casaModel->findById($id);
             $imagensExistentes = json_decode($casaAtual['imagens'] ?? '[]', true);
             $data['imagens'] = array_merge($imagensExistentes, $novasImagens);
         }
         
-        if ($casaModel->update($id, $data)) {
+        if ($this->casaModel->update($id, $data)) {
             SessionHelper::setFlash('success', 'Casa atualizada com sucesso!');
             UrlHelper::redirect('casas');
         } else {
@@ -253,9 +249,7 @@ class CasaController {
             UrlHelper::redirect('casas');
         }
         
-        $casaModel = new CasaModel();
-        
-        if ($casaModel->delete($id)) {
+        if ($this->casaModel->delete($id)) {
             SessionHelper::setFlash('success', 'Casa apagada com sucesso!');
         } else {
             SessionHelper::setFlash('error', 'Não foi possível apagar a casa. Verifique se existem reservas associadas.');
@@ -277,8 +271,7 @@ class CasaController {
             UrlHelper::redirect('casas');
         }
         
-        $casaModel = new CasaModel();
-        $casa = $casaModel->findById($id);
+        $casa = $this->casaModel->findById($id);
         
         if (!$casa) {
             SessionHelper::setFlash('error', 'Casa não encontrada.');
@@ -387,6 +380,28 @@ class CasaController {
         }
         
         return $imagens;
+    }
+    
+    /**
+     * Obter casas disponíveis (AJAX)
+     */
+    public function getDisponiveis() {
+        AuthHelper::requireAuth();
+        
+        $dataCheckin = $_GET['data_checkin'] ?? null;
+        $dataCheckout = $_GET['data_checkout'] ?? null;
+        $localizacaoId = $_GET['localizacao_id'] ?? null;
+        
+        if (!$dataCheckin || !$dataCheckout) {
+            echo json_encode([]);
+            exit;
+        }
+        
+        $casas = $this->casaModel->getDisponiveis($dataCheckin, $dataCheckout, $localizacaoId);
+        
+        header('Content-Type: application/json');
+        echo json_encode($casas);
+        exit;
     }
 }
 ?>

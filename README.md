@@ -4,7 +4,7 @@ Sistema completo em PHP para gestão de casas de hospedagem, desenvolvido com pa
 
 **Autor:** Oscar Massangaia  
 **Instituição:** Universidade Aberta ISCED  
-**Curso:** Engenharia Informática  
+**Curso:** Gestão de Sistemas de Informação
 **Versão:** 1.0
 
 ## 🌐 Página Inicial Pública
@@ -346,23 +346,20 @@ Edite o ficheiro `assets/css/style.css` e modifique as variáveis CSS:
 - **Botões de navegação** flutuantes e múltiplas saídas
 - **Banco de dados completo** com dados realistas
 
+### 🔧 Melhorias Técnicas (Fevereiro 2026)
+- **Documentação atualizada** com guias detalhados
+- **Estrutura de arquivos** otimizada e organizada
+- **Segurança reforçada** contra ataques comuns
+- **Código organizado** com padrão MVC consistente
+- **Banco de dados otimizado** com índices eficientes
+- **Performance melhorada** em consultas e carregamento
+
 ### 📈 Melhorias de UX
 - **Formulários intuitivos** com validação em tempo real
 - **Navegação suave** com scroll animado
 - **Feedback visual** em todas as ações
 - **Acessibilidade** melhorada com contraste adequado
-- **Performance otimizada** com índices e cache
-
-### 🔧 Melhorias Técnicas
-- **Segurança reforçada** contra ataques comuns
-- **Código organizado** com padrão MVC consistente
-- **Documentação completa** com exemplos práticos
-- **Banco de dados otimizado** com índices eficientes
-
-1. Edite a tabela `utilizadores` na BD
-2. Adicione novo valor ao ENUM do campo `perfil`
-3. Atualize os helpers de autenticação
-4. Ajuste as permissões nos controladores
+- **Interface responsiva** para todos os dispositivos
 
 ## 🔄 Fluxo de Trabalho Integrado
 
@@ -410,11 +407,12 @@ Edite o ficheiro `assets/css/style.css` e modifique as variáveis CSS:
 - **Email Geral:** gci@cfm.co.mz
 
 ### Documentação Adicional
-- `DISPONIBILIDADE_PUBLICA.md` - Guia do sistema público
-- `VALORES_MZN_ATUALIZADOS.md` - Tabela de valores em Metical
-- `CORRECOES_EURO_MZN.md` - Histórico de atualizações
-- `LOGOTIPO_INSTRUCOES.md` - Especificações do logotipo
-- `IMAGEM_FUNDO_INSTRUCOES.md` - Especificações da imagem de fundo
+- `DISPONIBILIDADE_PUBLICA.md` - Guia completo do sistema público de disponibilidade
+- `VALORES_MZN_ATUALIZADOS.md` - Tabela detalhada de valores em Metical
+- `CORRECOES_EURO_MZN.md` - Histórico das atualizações de moeda
+- `ATUALIZACAO_LOCALIZACOES.md` - Guia de atualização das localizações
+- `LOGOTIPO_INSTRUCOES.md` - Especificações técnicas do logotipo
+- `IMAGEM_FUNDO_INSTRUCOES.md` - Especificações da imagem de fundo do website
 
 ## 🎯 Roadmap Futuro
 
@@ -439,7 +437,7 @@ Edite o ficheiro `assets/css/style.css` e modifique as variáveis CSS:
 **Instituição:** Universidade Aberta ISCED  
 **Curso:** Engenharia Informática  
 **Versão:** 1.0  
-**Data:** 20/01/2026  
+**Data:** 11/02/2026  
 **Licença:** MIT  
 
 **Agradecimentos:** Universidade Aberta ISCED pelo apoio no desenvolvimento deste projeto acadêmico.
@@ -447,8 +445,3 @@ Edite o ficheiro `assets/css/style.css` e modifique as variáveis CSS:
 **Desenvolvido com PHP puro, MySQL, HTML5, CSS3 e JavaScript**
 **Compatível com WAMP (Apache + MySQL + PHP)**
 **🆕 Sistema Integrado de Hóspedes e Reservas**
-
-**Autor:** Oscar Massangaia  
-**Instituição:** Universidade Aberta ISCED  
-**Curso:** Engenharia Informática  
-**Versão:** 1.0

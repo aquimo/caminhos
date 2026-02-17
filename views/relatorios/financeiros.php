@@ -134,7 +134,7 @@
                         <?php foreach ($receitasPorMetodo as $metodo): ?>
                             <div style="text-align: center; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
                                 <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 5px;">
-                                    <?php echo formatCurrency($metodo['total']); ?>
+                                    <?php echo formatCurrency($metodo['total'] ?? 0); ?>
                                 </div>
                                 <div style="color: #666; font-size: 0.9rem;">
                                     <?php
@@ -148,11 +148,11 @@
                                         'transferencia_bancaria' => 'Transferência Bancária',
                                         'outro' => 'Outro'
                                     ];
-                                    echo $metodoLabels[$metodo['metodo_pagamento']] ?? $metodo['metodo_pagamento'];
+                                    echo $metodoLabels[$metodo['metodo_pagamento']] ?? ($metodo['metodo_pagamento'] ?? 'Desconhecido');
                                     ?>
                                 </div>
                                 <div style="color: #999; font-size: 0.8rem; margin-top: 5px;">
-                                    <?php echo $metodo['count']; ?> pagamento(s)
+                                    <?php echo ($metodo['count'] ?? 0); ?> pagamento(s)
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -183,16 +183,16 @@
                         <tbody>
                             <?php foreach ($pagamentosPendentes as $pagamento): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($pagamento['cliente_nome']); ?></td>
-                                    <td><?php echo htmlspecialchars($pagamento['casa_codigo']); ?></td>
-                                    <td><?php echo formatCurrency($pagamento['valor_total']); ?></td>
-                                    <td><?php echo formatCurrency($pagamento['valor_pago']); ?></td>
+                                    <td><?php echo htmlspecialchars($pagamento['cliente_nome'] ?? 'N/A'); ?></td>
+                                    <td><?php echo htmlspecialchars($pagamento['casa_codigo'] ?? 'N/A'); ?></td>
+                                    <td><?php echo formatCurrency($pagamento['valor_total'] ?? 0); ?></td>
+                                    <td><?php echo formatCurrency($pagamento['valor_pago'] ?? 0); ?></td>
                                     <td>
                                         <strong style="color: #dc3545;">
-                                            <?php echo formatCurrency($pagamento['pendente']); ?>
+                                            <?php echo formatCurrency($pagamento['pendente'] ?? 0); ?>
                                         </strong>
                                     </td>
-                                    <td><?php echo date('d/m/Y', strtotime($pagamento['data_checkin'])); ?></td>
+                                    <td><?php echo !empty($pagamento['data_checkin']) ? date('d/m/Y', strtotime($pagamento['data_checkin'])) : 'N/A'; ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

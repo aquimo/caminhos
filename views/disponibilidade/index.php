@@ -379,7 +379,7 @@
             <div class="houses-grid">
                 <?php foreach ($casas_disponiveis as $casa): ?>
                     <div class="house-card">
-                        <div class="house-image">
+                        <div class="house-image" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; height: 200px;">
                             <?= htmlspecialchars($casa['tipologia']) ?>
                         </div>
                         <div class="house-content">

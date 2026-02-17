@@ -49,6 +49,9 @@ class ReservaModel {
      * Obter reserva por ID
      */
     public function findById($id) {
+        // Debug: mostrar o ID recebido
+        error_log("ID recebido no findById: " . var_export($id, true));
+        
         $stmt = $this->db->prepare("
             SELECT r.*, 
                    c.nome as cliente_nome, c.email as cliente_email, c.telefone as cliente_telefone,
@@ -61,7 +64,12 @@ class ReservaModel {
             WHERE r.id = ?
         ");
         $stmt->execute([$id]);
-        return $stmt->fetch();
+        $result = $stmt->fetch();
+        
+        // Debug: mostrar o resultado
+        error_log("Resultado da consulta findById: " . var_export($result, true));
+        
+        return $result;
     }
     
     /**

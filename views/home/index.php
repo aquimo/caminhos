@@ -400,7 +400,7 @@
                 </p>
             </div>
             <div class="hero-image">
-                <img src="<?= ASSETS_PATH ?>images/hero-image.jpg" alt="Bairro Ferroviário" onerror="this.style.display='none'">
+                <img src="<?= ASSETS_PATH ?>images/home/hero-background.jpg" alt="Bairro Ferroviário" onerror="this.style.display='none'">
             </div>
         </section>
 
@@ -462,7 +462,9 @@
                 <?php if (isset($casas_disponiveis) && !empty($casas_disponiveis)): ?>
                     <?php foreach ($casas_disponiveis as $casa): ?>
                         <div class="house-card">
-                            <div class="house-image"><?= htmlspecialchars($casa['tipologia']) ?></div>
+                            <div class="house-image" style="background: linear-gradient(135deg, var(--primary-color), var(--primary-light)); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold; height: 200px;">
+                    <?= htmlspecialchars($casa['tipologia']) ?>
+                </div>
                             <div class="house-info">
                                 <h3 class="house-title">Apartamento <?= htmlspecialchars($casa['tipologia']) ?></h3>
                                 <p class="house-description">

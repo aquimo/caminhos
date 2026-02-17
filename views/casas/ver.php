@@ -139,27 +139,32 @@
         <?php endif; ?>
         
         <!-- Imagens -->
-        <?php 
-        $imagens = $casa['imagens'];
-        // Se já for array, usa diretamente, senão faz decode do JSON
-        if (is_string($imagens)) {
-            $imagens = json_decode($imagens, true);
-        }
-        if (!empty($imagens)): 
-        ?>
         <div style="margin-top: 30px;">
             <h4 style="margin-bottom: 15px; color: #333;">Imagens</h4>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <?php 
+                $imagens = $casa['imagens'];
+                if (is_string($imagens)) {
+                    $imagens = json_decode($imagens, true);
+                }
+                
+                // Criar imagens baseadas na tipologia se não houver
+                if (empty($imagens)) {
+                    $tipologia = $casa['tipologia'];
+                    $imagens = ["casas/{$tipologia}-placeholder.jpg"];
+                }
+                ?>
+                
                 <?php foreach ($imagens as $imagem): ?>
                     <div style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
                         <img src="<?php echo UrlHelper::asset($imagem); ?>" 
                              style="width: 100%; height: 200px; object-fit: cover; display: block;"
-                             alt="Imagem da casa">
+                             alt="Imagem da casa"
+                             onerror="this.src='<?php echo UrlHelper::asset('casas/placeholder.png'); ?>'">
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php endif; ?>
         
         <!-- Informações do Sistema -->
         <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">

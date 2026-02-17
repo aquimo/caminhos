@@ -148,7 +148,8 @@
                         <div style="position: relative; width: 100px; height: 100px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
                             <img src="<?php echo UrlHelper::asset($imagem); ?>" 
                                  style="width: 100%; height: 100%; object-fit: cover;"
-                                 alt="Imagem da casa">
+                                 alt="Imagem da casa"
+                                 onerror="this.src='<?php echo UrlHelper::asset('casas/placeholder.png'); ?>'">
                         </div>
                     <?php endforeach; ?>
                 </div>
