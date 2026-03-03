@@ -5,7 +5,7 @@ Sistema completo em PHP para gestão de casas de hospedagem, desenvolvido com pa
 **Autor:** Oscar Massangaia  
 **Instituição:** Universidade Aberta ISCED  
 **Curso:** Gestão de Sistemas de Informação
-**Versão:** 1.0
+**Versão:** 1.0 
 
 ## 🌐 Página Inicial Pública
 
